@@ -1,5 +1,5 @@
 window.WORLD_COUNTRIES=window.WORLD_COUNTRIES||[];window.WORLD_COUNTRIES.push({
-id:"cn",name:"中国",code:"CN",region:"東アジア",continent:"アジア",capital:"北京",flag:"assets/flags/cn.svg",emoji:"🇨🇳",
+id:"cn",name:"中国",code:"CN",region:"東アジア",continent:"ユーラシア",capital:"北京",flag:"assets/flags/cn.svg",emoji:"🇨🇳",
 items:{
 place:[{name:"上海の夜景",kind:"名所",image:"https://commons.wikimedia.org/wiki/Special:FilePath/Shanghai_Skyline_from_the_Bund.jpg?width=1000",sourceImage:"https://commons.wikimedia.org/wiki/File:Shanghai_Skyline_from_the_Bund.jpg",source:"Wikimedia Commons",license:"CC BY 2.0",credit:"Wilson Hui"}],
 heritage:[{name:"万里の長城",kind:"世界遺産",image:"https://commons.wikimedia.org/wiki/Special:FilePath/Great_Wall_of_China_July_2006.JPG?width=1000",sourceImage:"https://commons.wikimedia.org/wiki/File:Great_Wall_of_China_July_2006.JPG",source:"Wikimedia Commons",license:"CC0 1.0",credit:"Velatrix"}],
