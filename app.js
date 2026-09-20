@@ -37,7 +37,7 @@ function checkBadges(){
   const defs=window.WQ_ACHIEVEMENTS||{total:[],category:[]};
   const before=S.badges.size;
   defs.total.forEach((a,i)=>{if(S.correctTotal>=a[0])S.badges.add(achievementId("total",i))});
-  defs.category.forEach((a,i)=>{if(Number(S.categoryCorrect[a[0]]||0)>=a[2]||Number(S.categoryCorrect[a[0]]||0)>=a[1])S.badges.add(achievementId("category",i))});
+  defs.category.forEach((a,i)=>{const threshold=[1,3,5,10,15][i%5];if(Number(S.categoryCorrect[a[0]]||0)>=threshold)S.badges.add(achievementId("category",i))});
   const newly=[...S.badges].filter(id=>!window._wqBadgeSnapshot?.has(id));
   window._wqBadgeSnapshot=new Set(S.badges);
   if(newly.length)document.dispatchEvent(new CustomEvent("wq:badge",{detail:{ids:newly}}));
@@ -47,7 +47,7 @@ function badges(){
   const defs=window.WQ_ACHIEVEMENTS||{total:[],category:[]};
   const all=[
     ...defs.total.map((a,i)=>({id:achievementId("total",i),kind:"total",threshold:a[0],name:a[1],desc:a[2],current:S.correctTotal})),
-    ...defs.category.map((a,i)=>({id:achievementId("category",i),kind:"category",threshold:a[2],name:a[1],desc:a[2]+"",current:Number(S.categoryCorrect[a[0]]||0),category:a[0]}))
+    ...defs.category.map((a,i)=>({id:achievementId("category",i),kind:"category",threshold:[1,3,5,10,15][i%5],name:a[1],desc:a[2],current:Number(S.categoryCorrect[a[0]]||0),category:a[0]}))
   ];
   $("#badgesCount").textContent=S.badges.size+" / "+all.length;
   $("#badgesList").innerHTML=all.map(a=>{
