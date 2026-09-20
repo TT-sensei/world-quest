@@ -10,7 +10,7 @@ const NAVIS={
   complete:N.map(x=>`https://raw.githubusercontent.com/TT-sensei/navi-character-/main/assets/characters/${x}/fullbody/complete.png`)
 };
 const safeJSON=(key)=>{try{return JSON.parse(localStorage.getItem(key)||"[]")}catch{return[]}};
-const S={questions:[],i:0,score:0,answered:false,mode:"random",known:new Set(safeJSON("wq-known")),skills:new Set(safeJSON("wq-skills")),correctTotal:Number(localStorage.getItem("wq-correct-total")||0),categoryCorrect:safeJSON("wq-category-correct"),badges:new Set(safeJSON("wq-badges")),sessionKnown:new Set()};
+const S={questions:[],i:0,score:0,answered:false,mode:"random",known:new Set(safeJSON("wq-known")),skills:new Set(safeJSON("wq-skills")),correctTotal:Number(localStorage.getItem("wq-correct-total")||0),categoryCorrect:(()=>{try{return JSON.parse(localStorage.getItem("wq-category-correct")||"{}")}catch{return{}}})(),badges:new Set(safeJSON("wq-badges")),sessionKnown:new Set()};
 
 function show(id){
   screens.forEach(x=>{const el=document.getElementById(x);if(el)el.classList.toggle("active",x===id)});
