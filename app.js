@@ -94,7 +94,8 @@ function answer(b,q){
     if(x.dataset.v===q.answer)x.classList.add("correct","effect-correct-pop","effect-correct-ring");
   });
   if(!ok)b.classList.add("wrong","effect-wrong-shake");
-  document.dispatchEvent(new CustomEvent(ok?"edu:correct":"edu:wrong",{detail:{type:q.type,country:q.c.id}}));\n  const f=$("#feedback"),pool=ok?NAVIS.correct:NAVIS.retry,n=pool[Math.floor(Math.random()*pool.length)];
+  document.dispatchEvent(new CustomEvent(ok?"edu:correct":"edu:wrong",{detail:{type:q.type,country:q.c.id}}));
+  const f=$("#feedback"),pool=ok?NAVIS.correct:NAVIS.retry,n=pool[Math.floor(Math.random()*pool.length)];
   f.className="feedback show edu-answer-pop";
   f.innerHTML=`<div class="feedback-navi"><img src="${n}" alt=""></div><div class="feedback-copy">${ok?"<strong>正解！</strong> "+q.c.name+"です。":"<strong>正解は「"+q.answer+"」</strong>。答えを知ることも学びです。"}${q.it?.kind?"<br>"+q.it.kind+"。":""}</div>`;
   $("#nextBtn").classList.remove("hidden");
