@@ -2,7 +2,7 @@
 "use strict";
 const D=window.WORLD_DATA;
 const $=s=>document.querySelector(s);
-const screens=["home","quiz","result","known","atlas","skills","sources"];
+const screens=["home","quiz","result","known","atlas","skills","badges","sources"];
 const N=["riku","sora","kai","saku","tsuki","nami"];
 const NAVIS={
   correct:N.map(x=>`https://raw.githubusercontent.com/TT-sensei/navi-character-/main/assets/characters/${x}/fullbody/correct.png`),
@@ -10,13 +10,14 @@ const NAVIS={
   complete:N.map(x=>`https://raw.githubusercontent.com/TT-sensei/navi-character-/main/assets/characters/${x}/fullbody/complete.png`)
 };
 const safeJSON=(key)=>{try{return JSON.parse(localStorage.getItem(key)||"[]")}catch{return[]}};
-const S={questions:[],i:0,score:0,answered:false,mode:"random",known:new Set(safeJSON("wq-known")),skills:new Set(safeJSON("wq-skills")),sessionKnown:new Set()};
+const S={questions:[],i:0,score:0,answered:false,mode:"random",known:new Set(safeJSON("wq-known")),skills:new Set(safeJSON("wq-skills")),correctTotal:Number(localStorage.getItem("wq-correct-total")||0),categoryCorrect:safeJSON("wq-category-correct"),badges:new Set(safeJSON("wq-badges")),sessionKnown:new Set()};
 
 function show(id){
   screens.forEach(x=>{const el=document.getElementById(x);if(el)el.classList.toggle("active",x===id)});
   window.scrollTo(0,0);
   if(id==="atlas")atlas();
   if(id==="skills")skills();
+  if(id==="badges")badges();
   if(id==="known")known();
   if(id==="sources")sources();
 }
@@ -24,7 +25,41 @@ function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
 function save(){
   localStorage.setItem("wq-known",JSON.stringify([...S.known]));
   localStorage.setItem("wq-skills",JSON.stringify([...S.skills]));
+  localStorage.setItem("wq-correct-total",String(S.correctTotal));
+  localStorage.setItem("wq-category-correct",JSON.stringify(S.categoryCorrect));
+  localStorage.setItem("wq-badges",JSON.stringify([...S.badges]));
   const n=$("#knownCount");if(n)n.textContent=S.known.size;
+  const b=$("#badgeCount");if(b)b.textContent=S.badges.size;
+}
+function categoryLabel(id){return (D.categories.find(c=>c.id===id)||{}).label||id}
+function achievementId(type,index){return type+"-"+index}
+function checkBadges(){
+  const defs=window.WQ_ACHIEVEMENTS||{total:[],category:[]};
+  const before=S.badges.size;
+  defs.total.forEach((a,i)=>{if(S.correctTotal>=a[0])S.badges.add(achievementId("total",i))});
+  defs.category.forEach((a,i)=>{if(Number(S.categoryCorrect[a[0]]||0)>=a[2]||Number(S.categoryCorrect[a[0]]||0)>=a[1])S.badges.add(achievementId("category",i))});
+  const newly=[...S.badges].filter(id=>!window._wqBadgeSnapshot?.has(id));
+  window._wqBadgeSnapshot=new Set(S.badges);
+  if(newly.length)document.dispatchEvent(new CustomEvent("wq:badge",{detail:{ids:newly}}));
+  if(S.badges.size!==before)save();
+}
+function badges(){
+  const defs=window.WQ_ACHIEVEMENTS||{total:[],category:[]};
+  const all=[
+    ...defs.total.map((a,i)=>({id:achievementId("total",i),kind:"total",threshold:a[0],name:a[1],desc:a[2],current:S.correctTotal})),
+    ...defs.category.map((a,i)=>({id:achievementId("category",i),kind:"category",threshold:a[2],name:a[1],desc:a[2]+"",current:Number(S.categoryCorrect[a[0]]||0),category:a[0]}))
+  ];
+  $("#badgesCount").textContent=S.badges.size+" / "+all.length;
+  $("#badgesList").innerHTML=all.map(a=>{
+    const earned=S.badges.has(a.id);
+    const current=Math.min(a.current,a.threshold);
+    const pct=Math.min(100,Math.round(current/a.threshold*100));
+    const title=a.kind==="category"?categoryLabel(a.category)+" · "+a.name:a.name;
+    return `<article class="badge-card ${earned?"earned":"locked"}">
+      <div class="badge-icon"><span>${earned?"✦":"?"}</span></div>
+      <div class="badge-info"><b>${title}</b><small>${a.desc}</small><div class="badge-progress"><i style="width:${pct}%"></i></div><em>${current} / ${a.threshold}</em></div>
+    </article>`;
+  }).join("");
 }
 function make(mode="random"){
   const a=[];
@@ -87,7 +122,7 @@ function answer(b,q){
   if(S.answered)return;
   S.answered=true;
   const ok=b.dataset.v===q.answer;
-  if(ok){S.score++;S.skills.add(q.type)}
+  if(ok){S.score++;S.correctTotal++;S.categoryCorrect[q.type]=(Number(S.categoryCorrect[q.type])||0)+1;S.skills.add(q.type);checkBadges()}
   S.known.add(q.c.id);S.sessionKnown.add(q.c.id);save();
   document.querySelectorAll(".option").forEach(x=>{
     x.disabled=true;
@@ -149,12 +184,15 @@ function init(){
   $("#sourceBack").addEventListener("click",()=>show("home"));
   $("#atlasBack").addEventListener("click",()=>show("home"));
   $("#skillsBack").addEventListener("click",()=>show("home"));
+  $("#badgesBack").addEventListener("click",()=>show("home"));
+  $("#badgeBtn").addEventListener("click",()=>show("badges"));
   $("#againBtn").addEventListener("click",()=>start(S.mode));
   $("#homeBtn").addEventListener("click",()=>show("home"));
   $("#quitBtn").addEventListener("click",()=>show("home"));
   $("#progressBtn").addEventListener("click",()=>show("known"));
   $("#knownBack").addEventListener("click",()=>show("home"));
   $("#nextBtn").addEventListener("click",()=>{S.i++;S.i>=S.questions.length?finish():render()});
+  checkBadges();
   save();
 }
 init();
