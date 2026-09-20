@@ -7,5 +7,5 @@ culture:[{name:"タンゴ",kind:"伝統・文化",image:"https://commons.wikimed
 food:[{name:"アサード",kind:"食文化",image:"https://commons.wikimedia.org/wiki/Special:FilePath/Asado.jpg?width=1000",sourceImage:"https://commons.wikimedia.org/wiki/File:Asado.jpg",source:"Wikimedia Commons",license:"CC BY-SA 3.0",credit:"Ejmeza"}],
 facility:[],
 nature:[{name:"パタゴニアの氷河",kind:"自然",image:"https://commons.wikimedia.org/wiki/Special:FilePath/Perito_Moreno_Glacier.jpg?width=1000",sourceImage:"https://commons.wikimedia.org/wiki/File:Perito_Moreno_Glacier.jpg",source:"Wikimedia Commons",license:"Attribution only",credit:"Robert Scott Flaum"}],
-symbol:[{name:"アルゼンチンの国花・セイボ",kind:"シンボル",image:"https://commons.wikimedia.org/wiki/Special:FilePath/Erythrina_crista-galli%2C_ceibo.jpg?width=1000",sourceImage:"https://commons.wikimedia.org/wiki/File:Erythrina_crista-galli.jpg",source:"Wikimedia Commons",license:"CC BY-SA 3.0",credit:"Roberto Fiadone"}]
+symbol:[{name:"アルゼンチンの国花・セイボ",kind:"シンボル",image:"https://commons.wikimedia.org/wiki/Special:FilePath/Erythrina_crista-galli%2C_ceibo.jpg?width=1000",sourceImage:"https://commons.wikimedia.org/wiki/File:Erythrina_crista-galli%2C_ceibo.jpg",source:"Wikimedia Commons",license:"CC BY-SA 3.0",credit:"Roberto Fiadone"}]
 }});
