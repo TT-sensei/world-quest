@@ -91,7 +91,7 @@ function answer(b,q){
   S.known.add(q.c.id);S.sessionKnown.add(q.c.id);save();
   document.querySelectorAll(".option").forEach(x=>{
     x.disabled=true;
-    if(x.dataset.v===q.answer)x.classList.add("correct");
+    if(x.dataset.v===q.answer)x.classList.add("correct","effect-correct-pop","effect-correct-ring");
   });
   if(!ok)b.classList.add("wrong","effect-wrong-shake");
   document.dispatchEvent(new CustomEvent(ok?"edu:correct":"edu:wrong",{detail:{type:q.type,country:q.c.id}}));\n  const f=$("#feedback"),pool=ok?NAVIS.correct:NAVIS.retry,n=pool[Math.floor(Math.random()*pool.length)];
@@ -106,6 +106,7 @@ function start(mode="random"){
   show("quiz");render();
 }
 function finish(){
+  document.dispatchEvent(new CustomEvent("edu:complete",{detail:{score:S.score,total:S.questions.length}}));
   show("result");
   $("#resultNavi").src=NAVIS.complete[Math.floor(Math.random()*NAVIS.complete.length)];
   $("#score").textContent=S.score;$("#resultTotal").textContent=S.questions.length;
