@@ -1,5 +1,5 @@
 window.WORLD_COUNTRIES=window.WORLD_COUNTRIES||[];window.WORLD_COUNTRIES.push({
-id:"it",name:"イタリア",code:"IT",region:"南ヨーロッパ",continent:"ヨーロッパ",capital:"ローマ",flag:"assets/flags/it.svg",emoji:"🇮🇹",
+id:"it",name:"イタリア",code:"IT",region:"南ヨーロッパ",continent:"ユーラシア",capital:"ローマ",flag:"assets/flags/it.svg",emoji:"🇮🇹",
 items:{
 place:[
 {name:"ピサの斜塔",kind:"名所",image:"https://commons.wikimedia.org/wiki/Special:FilePath/Italy%20-%20Pisa%20-%20Leaning%20Tower%20of%20Pisa.jpg?width=1000",sourceImage:"https://commons.wikimedia.org/wiki/File:Italy_-_Pisa_-_Leaning_Tower_of_Pisa.jpg",source:"Wikimedia Commons",license:"CC BY-SA 3.0",credit:"Arne Müseler"},
