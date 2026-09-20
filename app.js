@@ -32,6 +32,17 @@ function save(){
   const b=$("#badgeCount");if(b)b.textContent=S.badges.size;
 }
 function categoryLabel(id){return (D.categories.find(c=>c.id===id)||{}).label||id}
+const BADGE_ART=[
+  "first-step","discovery","explorer","adventurer","knowledge","curiosity","great-answer","accuracy","clear","perfect",
+  "growth","new-skill","level-up","mastery","practice-master","problem-solver","deep-thinker","treasure","champion","mission-complete",
+  "focus","steady-progress","keep-going","never-give-up","breakthrough","challenge","connection","creative","explainer","independent",
+  "observer","power-up","special","speed","streak","comeback","courage","hard-worker","helper","combo",
+  "review-master","challenger","teamwork","idea","hidden-badge"
+];
+function badgeImage(index){
+  const name=BADGE_ART[index%BADGE_ART.length];
+  return "https://tt-sensei.github.io/edu-assets/assets/web/badges/common/"+name+"/badge.webp";
+}
 function achievementId(type,index){return type+"-"+index}
 function checkBadges(){
   const defs=window.WQ_ACHIEVEMENTS||{total:[],category:[]};
@@ -56,7 +67,7 @@ function badges(){
     const pct=Math.min(100,Math.round(current/a.threshold*100));
     const title=a.kind==="category"?categoryLabel(a.category)+" · "+a.name:a.name;
     return `<article class="badge-card ${earned?"earned":"locked"}">
-      <div class="badge-icon"><span>${earned?"✦":"?"}</span></div>
+      <div class="badge-icon"><img src="${badgeImage(all.indexOf(a))}" alt="" loading="lazy"></div>
       <div class="badge-info"><b>${title}</b><small>${a.desc}</small><div class="badge-progress"><i style="width:${pct}%"></i></div><em>${current} / ${a.threshold}</em></div>
     </article>`;
   }).join("");
