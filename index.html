@@ -2,16 +2,16 @@
 <header class="topbar"><div class="brand"><span class="brand-mark">WQ</span><div><h1>WORLD QUEST</h1><p>クイズで、世界を知ろう。</p></div></div><button id="progressBtn" class="progress-pill">知った国 <b id="knownCount">0</b></button></header>
 <section id="home" class="screen active"><div class="hero"><div><span class="eyebrow">WORLD QUEST</span><h2>クイズを選んで、<br>世界を旅しよう。</h2><p>好きなジャンルから挑戦できます。<br>もちろん、今までどおり完全ランダムでも遊べます。</p><button id="startBtn" class="primary">完全ランダムで挑戦</button></div><div class="hero-navi"><img src="https://raw.githubusercontent.com/TT-sensei/navi-character-/main/assets/characters/sora/fullbody/waving.png" alt=""></div></div>
 <div class="quiz-menu"><div class="quiz-menu-head"><div><span class="eyebrow">QUIZ MENU</span><h3>どのクイズにする？</h3></div><small>10ジャンル</small></div><div class="quiz-menu-grid">
-<button class="quiz-menu-btn" data-quiz-type="flag"><span>01</span><strong>国旗</strong><small>国旗から国を当てる</small></button>
-<button class="quiz-menu-btn" data-quiz-type="capital"><span>02</span><strong>首都</strong><small>首都から国を当てる</small></button>
-<button class="quiz-menu-btn" data-quiz-type="continent"><span>03</span><strong>大陸</strong><small>国と大陸を結びつける</small></button>
-<button class="quiz-menu-btn" data-quiz-type="place"><span>04</span><strong>名所</strong><small>有名な場所から国を当てる</small></button>
-<button class="quiz-menu-btn" data-quiz-type="heritage"><span>05</span><strong>世界遺産</strong><small>世界遺産から国を当てる</small></button>
-<button class="quiz-menu-btn" data-quiz-type="culture"><span>06</span><strong>文化</strong><small>文化から国を当てる</small></button>
-<button class="quiz-menu-btn" data-quiz-type="food"><span>07</span><strong>食文化</strong><small>食べ物から国を当てる</small></button>
-<button class="quiz-menu-btn" data-quiz-type="facility"><span>08</span><strong>建物・施設</strong><small>建物から国を当てる</small></button>
-<button class="quiz-menu-btn" data-quiz-type="nature"><span>09</span><strong>自然</strong><small>自然から国を当てる</small></button>
-<button class="quiz-menu-btn" data-quiz-type="symbol"><span>10</span><strong>シンボル</strong><small>特色から国を当てる</small></button>
+<button type="button" class="quiz-menu-btn" data-quiz-type="flag"><span>01</span><strong>国旗</strong><small>国旗から国を当てる</small></button>
+<button type="button" class="quiz-menu-btn" data-quiz-type="capital"><span>02</span><strong>首都</strong><small>首都から国を当てる</small></button>
+<button type="button" class="quiz-menu-btn" data-quiz-type="continent"><span>03</span><strong>大陸</strong><small>国と大陸を結びつける</small></button>
+<button type="button" class="quiz-menu-btn" data-quiz-type="place"><span>04</span><strong>名所</strong><small>有名な場所から国を当てる</small></button>
+<button type="button" class="quiz-menu-btn" data-quiz-type="heritage"><span>05</span><strong>世界遺産</strong><small>世界遺産から国を当てる</small></button>
+<button type="button" class="quiz-menu-btn" data-quiz-type="culture"><span>06</span><strong>文化</strong><small>文化から国を当てる</small></button>
+<button type="button" class="quiz-menu-btn" data-quiz-type="food"><span>07</span><strong>食文化</strong><small>食べ物から国を当てる</small></button>
+<button type="button" class="quiz-menu-btn" data-quiz-type="facility"><span>08</span><strong>建物・施設</strong><small>建物から国を当てる</small></button>
+<button type="button" class="quiz-menu-btn" data-quiz-type="nature"><span>09</span><strong>自然</strong><small>自然から国を当てる</small></button>
+<button type="button" class="quiz-menu-btn" data-quiz-type="symbol"><span>10</span><strong>シンボル</strong><small>特色から国を当てる</small></button>
 </div></div>
 <button id="atlasBtn" class="atlas-entry"><div><span class="eyebrow">WORLD ATLAS</span><strong>国図鑑</strong><small>問題に出てくる国・場所・文化を写真で見てみよう</small></div><b>→</b></button></section>
 <section id="quiz" class="screen"><div class="quiz-head"><button id="quitBtn" class="icon">×</button><span><b id="questionNumber">1</b> / <b id="questionTotal">10</b></span><em id="categoryLabel">国旗</em></div><article class="question-card"><small id="questionKicker"></small><h2 id="questionText"></h2><div id="visual" class="visual"></div></article><div id="options" class="options"></div><div id="feedback" class="feedback"></div><button id="nextBtn" class="next hidden">次の問題へ</button></section>
