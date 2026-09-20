@@ -1,0 +1,11 @@
+window.WORLD_COUNTRIES=window.WORLD_COUNTRIES||[];window.WORLD_COUNTRIES.push({
+id:"cn",name:"中国",code:"CN",region:"東アジア",continent:"アジア",capital:"北京",flag:"assets/flags/cn.svg",emoji:"🇨🇳",
+items:{
+place:[{name:"上海の夜景",kind:"名所",image:"https://commons.wikimedia.org/wiki/Special:FilePath/Shanghai_skyline_from_the_bund.jpg?width=1000",sourceImage:"https://commons.wikimedia.org/wiki/File:Shanghai_skyline_from_the_bund.jpg",source:"Wikimedia Commons",license:"CC0 1.0",credit:"Nkon21"}],
+heritage:[{name:"万里の長城",kind:"世界遺産",image:"https://commons.wikimedia.org/wiki/Special:FilePath/Great_Wall_of_China_July_2006.JPG?width=1000",sourceImage:"https://commons.wikimedia.org/wiki/File:Great_Wall_of_China_July_2006.JPG",source:"Wikimedia Commons",license:"CC0 1.0",credit:"Velatrix"}],
+culture:[{name:"龍舞(ドラゴンダンス)",kind:"伝統・文化",image:"https://commons.wikimedia.org/wiki/Special:FilePath/Dragon_dance.jpg?width=1000",sourceImage:"https://commons.wikimedia.org/wiki/File:Dragon_dance.jpg",source:"Wikimedia Commons",license:"CC BY-SA 4.0",credit:"Elmer B. Domingo"}],
+food:[{name:"小籠包(しょうろんぽう)",kind:"食文化",image:"https://commons.wikimedia.org/wiki/Special:FilePath/Xiaolongbao.jpg?width=1000",sourceImage:"https://commons.wikimedia.org/wiki/File:Xiaolongbao.jpg",source:"Wikimedia Commons",license:"CC BY 3.0",credit:"Bodhikun"}],
+facility:[{name:"北京国家体育場(鳥の巣)",kind:"施設",image:"https://commons.wikimedia.org/wiki/Special:FilePath/Beijing_national_stadium.jpg?width=1000",sourceImage:"https://commons.wikimedia.org/wiki/File:Beijing_national_stadium.jpg",source:"Wikimedia Commons",license:"CC BY-SA 3.0",credit:"Peter23"}],
+nature:[{name:"九寨溝(きゅうさいこう)",kind:"自然",image:"https://commons.wikimedia.org/wiki/Special:FilePath/Jiuzhaigou_Valley.jpg?width=1000",sourceImage:"https://commons.wikimedia.org/wiki/File:Jiuzhaigou_Valley.jpg",source:"Wikimedia Commons",license:"CC BY 3.0",credit:"Utoper"}],
+symbol:[{name:"ジャイアントパンダ",kind:"シンボル",image:"https://commons.wikimedia.org/wiki/Special:FilePath/Giant_panda%2C_Chongqing_Zoo%2C_China.JPG?width=1000",sourceImage:"https://commons.wikimedia.org/wiki/File:Giant_panda,_Chongqing_Zoo,_China.JPG",source:"Wikimedia Commons",license:"CC BY-SA 4.0",credit:"Jpbowen"}]
+}});
