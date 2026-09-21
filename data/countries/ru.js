@@ -71,7 +71,7 @@ window.WORLD_COUNTRIES.push({
     ],
     symbol:[
       {
-        name:"シラカバの林(代表的な樹木)",
+        name:"シラカバ",
         image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Birch%20bog20060915%20083.jpg?width=1000",
         sourceImage:"https://commons.wikimedia.org/wiki/File:Birch_bog20060915_083.jpg",
         source:"Wikimedia Commons",
