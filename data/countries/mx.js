@@ -1,7 +1,7 @@
 window.WORLD_COUNTRIES=window.WORLD_COUNTRIES||[];window.WORLD_COUNTRIES.push({
 id:"mx",name:"メキシコ",code:"MX",region:"中央アメリカ",continent:"北アメリカ",capital:"メキシコシティ",flag:"assets/flags/mx.svg",emoji:"🇲🇽",
 items:{
-place:[{name:"カンクンのリゾートビーチ",kind:"名所",image:"https://commons.wikimedia.org/wiki/Special:FilePath/Cancun_Beach.jpg?width=1000",sourceImage:"https://commons.wikimedia.org/wiki/File:Cancun_Beach.jpg",source:"Wikimedia Commons",license:"CC BY-SA 2.5",credit:"Keith Pomakis"}],
+place:[{name:"カンクン",kind:"名所",image:"https://commons.wikimedia.org/wiki/Special:FilePath/Cancun_Beach.jpg?width=1000",sourceImage:"https://commons.wikimedia.org/wiki/File:Cancun_Beach.jpg",source:"Wikimedia Commons",license:"CC BY-SA 2.5",credit:"Keith Pomakis"}],
 heritage:[{name:"チチェン・イッツァ(マヤのピラミッド)",kind:"世界遺産",image:"https://commons.wikimedia.org/wiki/Special:FilePath/Chichen_Itza_3.jpg?width=1000",sourceImage:"https://commons.wikimedia.org/wiki/File:Chichen_Itza_3.jpg",source:"Wikimedia Commons",license:"CC BY-SA 3.0",credit:"Daniel Schwen"}],
 culture:[{name:"マリアッチ(伝統の音楽隊)",kind:"伝統・文化",image:"https://commons.wikimedia.org/wiki/Special:FilePath/Guadalajara_mariachis.jpg?width=1000",sourceImage:"https://commons.wikimedia.org/wiki/File:Guadalajara_mariachis.jpg",source:"Wikimedia Commons",license:"CC BY 2.0",credit:"Gerardo Gonzalez"}],
 food:[{name:"タコス",kind:"食文化",image:"https://commons.wikimedia.org/wiki/Special:FilePath/Tacos_carne_asada.jpg?width=1000",sourceImage:"https://commons.wikimedia.org/wiki/File:Tacos_carne_asada.jpg",source:"Wikimedia Commons",license:"Public domain",credit:"Jon Sullivan"}],
