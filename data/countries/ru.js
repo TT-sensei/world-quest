@@ -31,7 +31,7 @@ window.WORLD_COUNTRIES.push({
     ],
     culture:[
       {
-        name:"ロシアの民族衣装(サラファンとココシュニク)",
+        name:"民族衣装(サラファンとココシュニク)",
         image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Traditional%20Russian%20Folk%20Costumes%2002.JPG?width=1000",
         sourceImage:"https://commons.wikimedia.org/wiki/File:Traditional_Russian_Folk_Costumes_02.JPG",
         source:"Wikimedia Commons",
@@ -41,7 +41,7 @@ window.WORLD_COUNTRIES.push({
     ],
     food:[
       {
-        name:"ピロシキ(ロシアで親しまれる具入りのパン)",
+        name:"ピロシキ(具入りのパン)",
         image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Pirozhki.jpg?width=1000",
         sourceImage:"https://commons.wikimedia.org/wiki/File:Pirozhki.jpg",
         source:"Wikimedia Commons",
@@ -71,7 +71,7 @@ window.WORLD_COUNTRIES.push({
     ],
     symbol:[
       {
-        name:"シラカバの林(ロシアを代表する樹木)",
+        name:"シラカバの林(代表的な樹木)",
         image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Birch%20bog20060915%20083.jpg?width=1000",
         sourceImage:"https://commons.wikimedia.org/wiki/File:Birch_bog20060915_083.jpg",
         source:"Wikimedia Commons",
