@@ -41,12 +41,12 @@ window.WORLD_COUNTRIES.push({
     ],
     food:[
       {
-        name:"ペリメニ(ロシアで親しまれる水ぎょうざ)",
-        image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Russian%20Pelmeni%20%28Dumplings%29%2C%20Rostov-on-Don%2C%20Russia.jpg?width=1000",
-        sourceImage:"https://commons.wikimedia.org/wiki/File:Russian_Pelmeni_(Dumplings),_Rostov-on-Don,_Russia.jpg",
+        name:"ピロシキ(ロシアで親しまれる具入りのパン)",
+        image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Pirozhki.jpg?width=1000",
+        sourceImage:"https://commons.wikimedia.org/wiki/File:Pirozhki.jpg",
         source:"Wikimedia Commons",
-        license:"CC BY 4.0",
-        credit:"Vyacheslav Argenberg"
+        license:"CC BY-SA 3.0",
+        credit:"Lokal Profil"
       }
     ],
     facility:[
