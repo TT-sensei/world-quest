@@ -31,7 +31,7 @@ window.WORLD_COUNTRIES.push({
     ],
     culture:[
       {
-        name:"クエッカ(チリの国の踊り)の伝統衣装",
+        name:"クエッカ(伝統的な踊り)の衣装",
         image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Traditional%20dress%20of%20the%20Chilean%20cueca%2C%20a%20national%20dance.jpg?width=1000",
         sourceImage:"https://commons.wikimedia.org/wiki/File:Traditional_dress_of_the_Chilean_cueca,_a_national_dance.jpg",
         source:"Wikimedia Commons",
