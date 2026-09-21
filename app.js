@@ -11,200 +11,27 @@ const NAVIS={
 };
 const safeJSON=(key)=>{try{return JSON.parse(localStorage.getItem(key)||"[]")}catch{return[]}};
 const S={questions:[],i:0,score:0,answered:false,mode:"random",known:new Set(safeJSON("wq-known")),skills:new Set(safeJSON("wq-skills")),correctTotal:Number(localStorage.getItem("wq-correct-total")||0),categoryCorrect:(()=>{try{return JSON.parse(localStorage.getItem("wq-category-correct")||"{}")}catch{return{}}})(),badges:new Set(safeJSON("wq-badges")),sessionKnown:new Set()};
-
-function show(id){
-  screens.forEach(x=>{const el=document.getElementById(x);if(el)el.classList.toggle("active",x===id)});
-  window.scrollTo(0,0);
-  if(id==="atlas")atlas();
-  if(id==="skills")skills();
-  if(id==="badges")badges();
-  if(id==="known")known();
-  if(id==="sources")sources();
-}
+function show(id){screens.forEach(x=>{const el=document.getElementById(x);if(el)el.classList.toggle("active",x===id)});window.scrollTo(0,0);if(id==="atlas")atlas();if(id==="skills")skills();if(id==="badges")badges();if(id==="known")known();if(id==="sources")sources()}
 function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
-function save(){
-  localStorage.setItem("wq-known",JSON.stringify([...S.known]));
-  localStorage.setItem("wq-skills",JSON.stringify([...S.skills]));
-  localStorage.setItem("wq-correct-total",String(S.correctTotal));
-  localStorage.setItem("wq-category-correct",JSON.stringify(S.categoryCorrect));
-  localStorage.setItem("wq-badges",JSON.stringify([...S.badges]));
-  const n=$("#knownCount");if(n)n.textContent=S.known.size;
-  const b=$("#badgeCount");if(b)b.textContent=S.badges.size;
-}
+function save(){localStorage.setItem("wq-known",JSON.stringify([...S.known]));localStorage.setItem("wq-skills",JSON.stringify([...S.skills]));localStorage.setItem("wq-correct-total",String(S.correctTotal));localStorage.setItem("wq-category-correct",JSON.stringify(S.categoryCorrect));localStorage.setItem("wq-badges",JSON.stringify([...S.badges]));const n=$("#knownCount");if(n)n.textContent=S.known.size;const b=$("#badgeCount");if(b)b.textContent=S.badges.size}
 function categoryLabel(id){return (D.categories.find(c=>c.id===id)||{}).label||id}
-const BADGE_ART=[
-  "first-step","discovery","explorer","adventurer","knowledge","curiosity","great-answer","accuracy","clear","perfect",
-  "growth","new-skill","level-up","mastery","practice-master","problem-solver","deep-thinker","treasure","champion","mission-complete",
-  "focus","steady-progress","keep-going","never-give-up","breakthrough","challenge","connection","creative","explainer","independent",
-  "observer","power-up","special","speed","streak","comeback","courage","hard-worker","helper","combo",
-  "review-master","challenger","teamwork","idea","hidden-badge"
-];
-function badgeImage(index){
-  const name=BADGE_ART[index%BADGE_ART.length];
-  return "https://tt-sensei.github.io/edu-assets/assets/web/badges/common/"+name+"/badge.webp";
-}
+const BADGE_ART=["first-step","discovery","explorer","adventurer","knowledge","curiosity","great-answer","accuracy","clear","perfect","growth","new-skill","level-up","mastery","practice-master","problem-solver","deep-thinker","treasure","champion","mission-complete","focus","steady-progress","keep-going","never-give-up","breakthrough","challenge","connection","creative","explainer","independent","observer","power-up","special","speed","streak","comeback","courage","hard-worker","helper","combo","review-master","challenger","teamwork","idea","hidden-badge"];
+function badgeImage(index){const name=BADGE_ART[index%BADGE_ART.length];return "https://tt-sensei.github.io/edu-assets/assets/web/badges/common/"+name+"/badge.webp"}
 function achievementId(type,index){return type+"-"+index}
-function checkBadges(){
-  const defs=window.WQ_ACHIEVEMENTS||{total:[],category:[]};
-  const before=S.badges.size;
-  defs.total.forEach((a,i)=>{if(S.correctTotal>=a[0])S.badges.add(achievementId("total",i))});
-  defs.category.forEach((a,i)=>{const threshold=[1,3,5,10,15][i%5];if(Number(S.categoryCorrect[a[0]]||0)>=threshold)S.badges.add(achievementId("category",i))});
-  const newly=[...S.badges].filter(id=>!window._wqBadgeSnapshot?.has(id));
-  window._wqBadgeSnapshot=new Set(S.badges);
-  if(newly.length)document.dispatchEvent(new CustomEvent("wq:badge",{detail:{ids:newly}}));
-  if(S.badges.size!==before)save();
-}
-function badges(){
-  const defs=window.WQ_ACHIEVEMENTS||{total:[],category:[]};
-  const all=[
-    ...defs.total.map((a,i)=>({id:achievementId("total",i),kind:"total",threshold:a[0],name:a[1],desc:a[2],current:S.correctTotal})),
-    ...defs.category.map((a,i)=>({id:achievementId("category",i),kind:"category",threshold:[1,3,5,10,15][i%5],name:a[1],desc:a[2],current:Number(S.categoryCorrect[a[0]]||0),category:a[0]}))
-  ];
-  $("#badgesCount").textContent=S.badges.size+" / "+all.length;
-  $("#badgesList").innerHTML=all.map(a=>{
-    const earned=S.badges.has(a.id);
-    const current=Math.min(a.current,a.threshold);
-    const pct=Math.min(100,Math.round(current/a.threshold*100));
-    const title=a.kind==="category"?categoryLabel(a.category)+" · "+a.name:a.name;
-    return `<article class="badge-card ${earned?"earned":"locked"}">
-      <div class="badge-icon"><img src="${badgeImage(all.indexOf(a))}" alt="" loading="lazy"></div>
-      <div class="badge-info"><b>${title}</b><small>${a.desc}</small><div class="badge-progress"><i style="width:${pct}%"></i></div><em>${current} / ${a.threshold}</em></div>
-    </article>`;
-  }).join("");
-}
-function make(mode="random"){
-  const a=[];
-  if(!D||!Array.isArray(D.countries))return a;
-  D.countries.forEach(c=>{
-    if(mode==="random"||mode==="flag")a.push({type:"flag",c,answer:c.name,q:"この国旗は、どこの国？",v:{k:"flag",src:c.flag}});
-    if(mode==="random"||mode==="capital")a.push({type:"capital",c,answer:c.name,q:"この首都をもつ国はどこ？",v:{k:"text",caption:c.capital,kind:"首都"}});
-    if(mode==="random"||mode==="continent")a.push({type:"continent",c,answer:c.continent,q:"この国がある大陸はどこ？",v:{k:"country",caption:c.name,flag:c.flag,kind:"大陸"}});
-    ["place","heritage","culture","food","facility","nature","symbol"].forEach(k=>{
-      if(mode!=="random"&&mode!==k)return;
-      (c.items?.[k]||[]).forEach(it=>{
-        const q=k==="food"?"この食べ物で知られている国はどこ？":
-          k==="culture"?"この文化と関わりが深い国はどこ？":
-          k==="heritage"?"この世界遺産がある国はどこ？":
-          k==="nature"?"この自然の景観で知られる国はどこ？":
-          k==="facility"?"この建物・施設がある国はどこ？":
-          k==="symbol"?"このシンボル・特色と関わりが深い国はどこ？":"この場所がある国はどこ？";
-        a.push({type:k,c,it,answer:c.name,q,v:it.image?{k:"image",src:it.image,alt:it.name,caption:it.name}:{k:"text",caption:it.name,kind:it.kind||""}});
-      });
-    });
-  });
-  return shuffle(a);
-}
-function opts(q){
-  if(q.type==="continent"){
-    const all=[...new Set(D.countries.map(c=>c.continent).filter(Boolean))];
-    return shuffle([q.answer,...shuffle(all.filter(x=>x!==q.answer)).slice(0,3)]);
-  }
-  return shuffle([q.answer,...shuffle(D.countries.filter(c=>c.name!==q.answer).map(c=>c.name)).slice(0,3)]);
-}
-function render(){
-  const q=S.questions[S.i];
-  if(!q){finish();return}
-  S.answered=false;
-  $("#questionNumber").textContent=S.i+1;
-  $("#questionTotal").textContent=S.questions.length;
-  $("#categoryLabel").textContent=(D.categories.find(c=>c.id===q.type)||{}).label||"クイズ";
-  $("#questionText").textContent=q.q;
-  const v=$("#visual");
-  if(q.v.k==="flag"){
-    v.className="visual flag";
-    v.innerHTML=`<img src="${q.v.src}" alt="国旗">`;
-  }else if(q.v.k==="image"){
-    v.className="visual image";
-    v.innerHTML=`<img src="${q.v.src}" alt="${q.v.alt}" loading="lazy" decoding="async"><div class="visual-title">${q.v.caption}</div>`;
-  }else if(q.v.k==="country"){
-    v.className="visual text-first country-visual";
-    v.innerHTML=`<img src="${q.v.flag}" alt="" aria-hidden="true"><div class="visual-title">${q.v.caption}</div><small class="visual-kind">${q.v.kind}</small>`;
-  }else{
-    v.className="visual text-first";
-    v.innerHTML=`<div class="visual-title">${q.v.caption}</div><small class="visual-kind">${q.v.kind||""}</small>`;
-  }
-  $("#feedback").className="feedback";
-  $("#feedback").innerHTML="";
-  $("#nextBtn").classList.add("hidden");
-  $("#options").innerHTML=opts(q).map((o,i)=>`<button type="button" class="option" data-v="${o}"><span class="letter">${String.fromCharCode(65+i)}</span><span>${o}</span></button>`).join("");
-  document.querySelectorAll(".option").forEach(b=>b.addEventListener("click",()=>answer(b,q),{once:true}));
-}
-function answer(b,q){
-  if(S.answered)return;
-  S.answered=true;
-  const ok=b.dataset.v===q.answer;
-  if(ok){S.score++;S.correctTotal++;S.categoryCorrect[q.type]=(Number(S.categoryCorrect[q.type])||0)+1;S.skills.add(q.type);checkBadges()}
-  S.known.add(q.c.id);S.sessionKnown.add(q.c.id);save();
-  document.querySelectorAll(".option").forEach(x=>{
-    x.disabled=true;
-    if(x.dataset.v===q.answer)x.classList.add("correct","effect-correct-pop","effect-correct-ring");
-  });
-  if(!ok)b.classList.add("wrong","effect-wrong-shake");
-  document.dispatchEvent(new CustomEvent(ok?"edu:correct":"edu:wrong",{detail:{type:q.type,country:q.c.id}}));
-  const f=$("#feedback"),pool=ok?NAVIS.correct:NAVIS.retry,n=pool[Math.floor(Math.random()*pool.length)];
-  f.className="feedback show edu-answer-pop";
-  f.innerHTML=`<div class="feedback-navi"><img src="${n}" alt=""></div><div class="feedback-copy">${ok?"<strong>正解！</strong> "+q.c.name+"です。":"<strong>正解は「"+q.answer+"」</strong>。答えを知ることも学びです。"}${q.it?.kind?"<br>"+q.it.kind+"。":""}</div>`;
-  $("#nextBtn").classList.remove("hidden");
-}
-function start(mode="random"){
-  const pool=make(mode);
-  if(!pool.length)return;
-  S.mode=mode;S.questions=pool.slice(0,10);S.i=0;S.score=0;S.sessionKnown=new Set();
-  show("quiz");render();
-}
-function finish(){
-  document.dispatchEvent(new CustomEvent("edu:complete",{detail:{score:S.score,total:S.questions.length}}));
-  show("result");
-  $("#resultNavi").src=NAVIS.complete[Math.floor(Math.random()*NAVIS.complete.length)];
-  $("#score").textContent=S.score;$("#resultTotal").textContent=S.questions.length;
-  $("#resultMessage").textContent=S.score===S.questions.length?"すべて正解！世界の見え方がひとつ広がりました。":"知らない問題があっても大丈夫。答えを知ることもWORLD QUESTの学びです。";
-  $("#resultCountries").innerHTML=[...S.sessionKnown].map(id=>{const c=D.countries.find(x=>x.id===id);return c?`<span class="chip">${c.shortName||c.name}</span>`:""}).join("");
-}
-function atlas(){
-  const cats=D.categories.filter(c=>!["flag","capital","continent"].includes(c.id));
-  let html="";
-  D.countries.forEach((c,i)=>{
-    html+=`<article class="atlas-card"><button type="button" class="atlas-country" aria-expanded="false" aria-controls="atlas-country-${i}"><span class="atlas-country-name"><img src="${c.flag}" alt="" aria-hidden="true"><strong>${c.name}</strong></span><span class="atlas-chevron" aria-hidden="true">＋</span></button><div id="atlas-country-${i}" class="atlas-country-detail" hidden><div class="atlas-meta"><span>${c.region}</span><span>${c.continent}</span><span>首都 ${c.capital}</span></div><div class="atlas-grid">`;
-    cats.forEach(cat=>(c.items?.[cat.id]||[]).forEach(it=>{html+=`<div class="atlas-item">${it.image?`<img src="${it.image}" alt="" loading="lazy">`:""}<div><b>${cat.label}</b><strong>${it.name}</strong><small>${it.kind||""}</small></div></div>`}));
-    html+=`</div><a class="atlas-search" href="https://www.google.com/search?q=${encodeURIComponent(c.name+" について")}" target="_blank" rel="noopener">詳しく調べる 🔍</a></div></article>`;
-  });
-  $("#atlasList").innerHTML=html;
-  document.querySelectorAll(".atlas-country").forEach(b=>b.addEventListener("click",()=>{
-    const p=document.getElementById(b.getAttribute("aria-controls")),open=b.getAttribute("aria-expanded")==="true";
-    b.setAttribute("aria-expanded",String(!open));b.querySelector(".atlas-chevron").textContent=open?"＋":"−";p.hidden=open;
-  }));
-}
-function skills(){
-  const all=[["flag","国旗を見て、国を答えられる"],["capital","首都から国を答えられる"],["continent","国がどの大陸にあるか答えられる"],["place","世界の有名な場所を知っている"],["heritage","世界遺産と国を結びつけられる"],["culture","国と文化を結びつけられる"],["food","国と食文化を結びつけられる"],["facility","国と建物・施設を結びつけられる"],["nature","国と自然を結びつけられる"],["symbol","国のシンボルや特色を知っている"]];
-  $("#skillsList").innerHTML=all.map(([id,text])=>`<div class="skill-row ${S.skills.has(id)?"earned":"locked"}"><span class="skill-mark">${S.skills.has(id)?"✓":"—"}</span><div><strong>${text}</strong><small>${S.skills.has(id)?"クイズで正解しました":"クイズで正解すると追加されます"}</small></div></div>`).join("");
-}
-function sources(){
-  let html='<div class="source-card"><strong>国旗</strong>リポジトリ内のassets/flagsに保存した国旗SVGを使用しています。元データ：hampusborgos/country-flags。</div>';
-  D.countries.forEach(c=>Object.keys(c.items||{}).forEach(cat=>(c.items[cat]||[]).forEach(it=>{if(it.image)html+=`<div class="source-card"><strong>${c.name}：${it.name}</strong>${it.credit?"作者："+it.credit+" / ":""}${it.license?"ライセンス："+it.license+" / ":""}出典：${it.source||"Wikimedia Commons"}<br><a href="${it.sourceImage||it.image}" target="_blank" rel="noopener">画像・ライセンス確認</a></div>`})));
-  html+='<div class="source-card"><strong>ナビキャラ</strong>TT-sensei / NAVI CHARACTERのWeb教材用素材を参照しています。<br><a href="https://github.com/TT-sensei/navi-character-/" target="_blank" rel="noopener">NAVI CHARACTER</a></div><div class="source-card"><strong>世界遺産</strong>登録情報の確認先：UNESCO World Heritage Centre<br><a href="https://whc.unesco.org/" target="_blank" rel="noopener">UNESCO World Heritage Centre</a></div>';
-  $("#sourceList").innerHTML=html;
-}
-function known(){
-  $("#knownList").innerHTML=D.countries.filter(c=>S.known.has(c.id)).map(c=>`<div class="known-card"><img src="${c.flag}" alt=""><strong>${c.shortName||c.name}</strong><small>${c.region} / ${c.capital}</small></div>`).join("")||'<div class="known-card"><strong>まだありません</strong><small>クイズに挑戦して、世界を知ろう。</small></div>';
-}
-function init(){
-  if(!D||!Array.isArray(D.countries)||!Array.isArray(D.categories)){console.error("WORLD QUEST: data not ready");return}
-  $("#startBtn").addEventListener("click",()=>start("random"));
-  document.querySelectorAll(".quiz-menu-btn").forEach(b=>b.addEventListener("click",()=>start(b.dataset.quizType)));
-  $("#atlasBtn").addEventListener("click",()=>show("atlas"));
-  $("#sourceBack").addEventListener("click",()=>show("home"));
-  $("#atlasBack").addEventListener("click",()=>show("home"));
-  $("#skillsBack").addEventListener("click",()=>show("home"));
-  $("#badgesBack").addEventListener("click",()=>show("home"));
-  $("#badgeBtn").addEventListener("click",()=>show("badges"));
-  $("#againBtn").addEventListener("click",()=>start(S.mode));
-  $("#homeBtn").addEventListener("click",()=>show("home"));
-  $("#quitBtn").addEventListener("click",()=>show("home"));
-  $("#progressBtn").addEventListener("click",()=>show("known"));
-  $("#knownBack").addEventListener("click",()=>show("home"));
-  $("#nextBtn").addEventListener("click",()=>{S.i++;S.i>=S.questions.length?finish():render()});
-  checkBadges();
-  save();
-}
+function checkBadges(){const defs=window.WQ_ACHIEVEMENTS||{total:[],category:[]};const before=S.badges.size;defs.total.forEach((a,i)=>{if(S.correctTotal>=a[0])S.badges.add(achievementId("total",i))});defs.category.forEach((a,i)=>{const threshold=[1,3,5,10,15][i%5];if(Number(S.categoryCorrect[a[0]]||0)>=threshold)S.badges.add(achievementId("category",i))});const newly=[...S.badges].filter(id=>!window._wqBadgeSnapshot?.has(id));window._wqBadgeSnapshot=new Set(S.badges);if(newly.length)document.dispatchEvent(new CustomEvent("wq:badge",{detail:{ids:newly}}));if(S.badges.size!==before)save()}
+const CONTINENTS=["ユーラシア","北アメリカ","南アメリカ","オーストラリア","アフリカ","南極"];
+function sixContinent(region,current){const r=String(region||"");const c=String(current||"");if(/アフリカ/.test(r)||c==="アフリカ")return "アフリカ";if(/北アメリカ|中央アメリカ|カリブ/.test(r)||c==="北アメリカ")return "北アメリカ";if(/南アメリカ/.test(r)||c==="南アメリカ")return "南アメリカ";if(/オセアニア|オーストラリア/.test(r)||c==="オセアニア"||c==="オーストラリア")return "オーストラリア";if(/南極/.test(r)||c==="南極")return "南極";return "ユーラシア"}
+function quizContinent(c){return sixContinent(c.region,c.continent)}
+function make(mode="random"){const a=[];if(!D||!Array.isArray(D.countries))return a;D.countries.forEach(c=>{if(mode==="random"||mode==="flag")a.push({type:"flag",c,answer:c.name,q:"この国旗は、どこの国？",v:{k:"flag",src:c.flag}});if(mode==="random"||mode==="capital")a.push({type:"capital",c,answer:c.name,q:"この首都をもつ国はどこ？",v:{k:"text",caption:c.capital,kind:"首都"}});if(mode==="random"||mode==="continent")a.push({type:"continent",c,answer:quizContinent(c),q:"この国がある大陸はどこ？",v:{k:"country",caption:c.name,flag:c.flag,kind:"大陸"}});["place","heritage","culture","food","facility","nature","symbol"].forEach(k=>{if(mode!=="random"&&mode!==k)return;(c.items?.[k]||[]).forEach(it=>{const q=k==="food"?"この食べ物で知られている国はどこ？":k==="culture"?"この文化と関わりが深い国はどこ？":k==="heritage"?"この世界遺産がある国はどこ？":k==="nature"?"この自然の景観で知られる国はどこ？":k==="facility"?"この建物・施設がある国はどこ？":k==="symbol"?"このシンボル・特色と関わりが深い国はどこ？":"この場所がある国はどこ？";a.push({type:k,c,it,answer:c.name,q,v:it.image?{k:"image",src:it.image,alt:it.name,caption:it.name}:{k:"text",caption:it.name,kind:it.kind||""}})})})});return shuffle(a)}
+function opts(q){if(q.type==="continent")return shuffle([q.answer,...shuffle(CONTINENTS.filter(x=>x!==q.answer)).slice(0,3)]);return shuffle([q.answer,...shuffle(D.countries.filter(c=>c.name!==q.answer).map(c=>c.name)).slice(0,3)])}
+function render(){const q=S.questions[S.i];if(!q){finish();return}S.answered=false;$("#questionNumber").textContent=S.i+1;$("#questionTotal").textContent=S.questions.length;$("#categoryLabel").textContent=(D.categories.find(c=>c.id===q.type)||{}).label||"クイズ";$("#questionText").textContent=q.q;const v=$("#visual");if(q.v.k==="flag"){v.className="visual flag";v.innerHTML=`<img src="${q.v.src}" alt="国旗">`}else if(q.v.k==="image"){v.className="visual image";v.innerHTML=`<img src="${q.v.src}" alt="${q.v.alt}" loading="lazy" decoding="async"><div class="visual-title">${q.v.caption}</div>`}else if(q.v.k==="country"){v.className="visual text-first country-visual";v.innerHTML=`<img src="${q.v.flag}" alt="" aria-hidden="true"><div class="visual-title">${q.v.caption}</div><small class="visual-kind">${q.v.kind}</small>`}else{v.className="visual text-first";v.innerHTML=`<div class="visual-title">${q.v.caption}</div><small class="visual-kind">${q.v.kind||""}</small>`}$("#feedback").className="feedback";$("#feedback").innerHTML="";$("#nextBtn").classList.add("hidden");$("#options").innerHTML=opts(q).map((o,i)=>`<button type="button" class="option" data-v="${o}"><span class="letter">${String.fromCharCode(65+i)}</span><span>${o}</span></button>`).join("");document.querySelectorAll(".option").forEach(b=>b.addEventListener("click",()=>answer(b,q),{once:true}))}
+function answer(b,q){if(S.answered)return;S.answered=true;const ok=b.dataset.v===q.answer;if(ok){S.score++;S.correctTotal++;S.categoryCorrect[q.type]=(Number(S.categoryCorrect[q.type])||0)+1;S.skills.add(q.type);checkBadges()}S.known.add(q.c.id);S.sessionKnown.add(q.c.id);save();document.querySelectorAll(".option").forEach(x=>{x.disabled=true;if(x.dataset.v===q.answer)x.classList.add("correct","effect-correct-pop","effect-correct-ring")});if(!ok)b.classList.add("wrong","effect-wrong-shake");document.dispatchEvent(new CustomEvent(ok?"edu:correct":"edu:wrong",{detail:{type:q.type,country:q.c.id}}));const f=$("#feedback"),pool=ok?NAVIS.correct:NAVIS.retry,n=pool[Math.floor(Math.random()*pool.length)];f.className="feedback show edu-answer-pop";f.innerHTML=`<div class="feedback-navi"><img src="${n}" alt=""></div><div class="feedback-copy">${ok?"<strong>正解！</strong> "+q.c.name+"です。":"<strong>正解は「"+q.answer+"」</strong>。答えを知ることも学びです。"}${q.it?.kind?"<br>"+q.it.kind+"。":""}</div>`;$("#nextBtn").classList.remove("hidden")}
+function start(mode="random"){const pool=make(mode);if(!pool.length)return;S.mode=mode;S.questions=pool.slice(0,10);S.i=0;S.score=0;S.sessionKnown=new Set();show("quiz");render()}
+function finish(){document.dispatchEvent(new CustomEvent("edu:complete",{detail:{score:S.score,total:S.questions.length}}));show("result");$("#resultNavi").src=NAVIS.complete[Math.floor(Math.random()*NAVIS.complete.length)];$("#score").textContent=S.score;$("#resultTotal").textContent=S.questions.length;$("#resultMessage").textContent=S.score===S.questions.length?"すべて正解！世界の見え方がひとつ広がりました。":"知らない問題があっても大丈夫。答えを知ることもWORLD QUESTの学びです。";$("#resultCountries").innerHTML=[...S.sessionKnown].map(id=>{const c=D.countries.find(x=>x.id===id);return c?`<span class="chip">${c.shortName||c.name}</span>`:""}).join("")}
+function atlas(){const cats=D.categories.filter(c=>!["flag","capital","continent"].includes(c.id));let html="";D.countries.forEach((c,i)=>{html+=`<article class="atlas-card"><button type="button" class="atlas-country" aria-expanded="false" aria-controls="atlas-country-${i}"><span class="atlas-country-name"><img src="${c.flag}" alt="" aria-hidden="true"><strong>${c.name}</strong></span><span class="atlas-chevron" aria-hidden="true">＋</span></button><div id="atlas-country-${i}" class="atlas-country-detail" hidden><div class="atlas-meta"><span>${c.region}</span><span>${c.continent}</span><span>首都 ${c.capital}</span></div><div class="atlas-grid">`;cats.forEach(cat=>(c.items?.[cat.id]||[]).forEach(it=>{html+=`<div class="atlas-item">${it.image?`<img src="${it.image}" alt="" loading="lazy">`:""}<div><b>${cat.label}</b><strong>${it.name}</strong><small>${it.kind||""}</small></div></div` }));html+=`</div><a class="atlas-search" href="https://www.google.com/search?q=${encodeURIComponent(c.name+" について")}" target="_blank" rel="noopener">詳しく調べる 🔍</a></div></article>`});$("#atlasList").innerHTML=html;document.querySelectorAll(".atlas-country").forEach(b=>b.addEventListener("click",()=>{const p=document.getElementById(b.getAttribute("aria-controls")),open=b.getAttribute("aria-expanded")==="true";b.setAttribute("aria-expanded",String(!open));b.querySelector(".atlas-chevron").textContent=open?"＋":"−";p.hidden=open}))}
+function skills(){const all=[["flag","国旗を見て、国を答えられる"],["capital","首都から国を答えられる"],["continent","国がどの大陸にあるか答えられる"],["place","世界の有名な場所を知っている"],["heritage","世界遺産と国を結びつけられる"],["culture","国と文化を結びつけられる"],["food","国と食文化を結びつけられる"],["facility","国と建物・施設を結びつけられる"],["nature","国と自然を結びつけられる"],["symbol","国のシンボルや特色を知っている"]];$("#skillsList").innerHTML=all.map(([id,text])=>`<div class="skill-row ${S.skills.has(id)?"earned":"locked"}"><span class="skill-mark">${S.skills.has(id)?"✓":"—"}</span><div><strong>${text}</strong><small>${S.skills.has(id)?"クイズで正解しました":"クイズで正解すると追加されます"}</small></div></div>`).join("")}
+function sources(){let html='<div class="source-card"><strong>国旗</strong>リポジトリ内のassets/flagsに保存した国旗SVGを使用しています。元データ：hampusborgos/country-flags。</div>';D.countries.forEach(c=>Object.keys(c.items||{}).forEach(cat=>(c.items[cat]||[]).forEach(it=>{if(it.image)html+=`<div class="source-card"><strong>${c.name}：${it.name}</strong>${it.credit?"作者："+it.credit+" / ":""}${it.license?"ライセンス："+it.license+" / ":""}出典：${it.source||"Wikimedia Commons"}<br><a href="${it.sourceImage||it.image}" target="_blank" rel="noopener">画像・ライセンス確認</a></div>`})));html+='<div class="source-card"><strong>ナビキャラ</strong>TT-sensei / NAVI CHARACTERのWeb教材用素材を参照しています。<br><a href="https://github.com/TT-sensei/navi-character-/" target="_blank" rel="noopener">NAVI CHARACTER</a></div><div class="source-card"><strong>世界遺産</strong>登録情報の確認先：UNESCO World Heritage Centre<br><a href="https://whc.unesco.org/" target="_blank" rel="noopener">UNESCO World Heritage Centre</a></div>';$("#sourceList").innerHTML=html}
+function known(){$("#knownList").innerHTML=D.countries.filter(c=>S.known.has(c.id)).map(c=>`<div class="known-card"><img src="${c.flag}" alt=""><strong>${c.shortName||c.name}</strong><small>${c.region} / ${c.capital}</small></div>`).join("")||'<div class="known-card"><strong>まだありません</strong><small>クイズに挑戦して、世界を知ろう。</small></div>'}
+function init(){if(!D||!Array.isArray(D.countries)||!Array.isArray(D.categories)){console.error("WORLD QUEST: data not ready");return}$("#startBtn").addEventListener("click",()=>start("random"));document.querySelectorAll(".quiz-menu-btn").forEach(b=>b.addEventListener("click",()=>start(b.dataset.quizType)));$("#atlasBtn").addEventListener("click",()=>show("atlas"));$("#sourceBack").addEventListener("click",()=>show("home"));$("#atlasBack").addEventListener("click",()=>show("home"));$("#skillsBack").addEventListener("click",()=>show("home"));$("#badgesBack").addEventListener("click",()=>show("home"));$("#badgeBtn").addEventListener("click",()=>show("badges"));$("#againBtn").addEventListener("click",()=>start(S.mode));$("#homeBtn").addEventListener("click",()=>show("home"));$("#quitBtn").addEventListener("click",()=>show("home"));$("#progressBtn").addEventListener("click",()=>show("known"));$("#knownBack").addEventListener("click",()=>show("home"));$("#nextBtn").addEventListener("click",()=>{S.i++;S.i>=S.questions.length?finish():render()});checkBadges();save()}
 init();
 })();
