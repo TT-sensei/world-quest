@@ -71,7 +71,7 @@ window.WORLD_COUNTRIES.push({
     ],
     symbol:[
       {
-        name:"コピウエ(チリの国花)",
+        name:"コピウエ(国花)",
         image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Lapageria%20rosea%20-%20Copihue.jpg?width=1000",
         sourceImage:"https://commons.wikimedia.org/wiki/File:Lapageria_rosea_-_Copihue.jpg",
         source:"Wikimedia Commons",
