@@ -31,7 +31,7 @@ window.WORLD_COUNTRIES.push({
     ],
     culture:[
       {
-        name:"民族衣装(サラファンとココシュニク)",
+        name:"サラファンとココシュニク",
         image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Traditional%20Russian%20Folk%20Costumes%2002.JPG?width=1000",
         sourceImage:"https://commons.wikimedia.org/wiki/File:Traditional_Russian_Folk_Costumes_02.JPG",
         source:"Wikimedia Commons",
