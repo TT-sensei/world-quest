@@ -19,11 +19,11 @@ window.WORLD_COUNTRIES.push({
     }],
     heritage:[{
       name:"ツィットグロッゲ(時計塔・旧市街)",
-      image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Bern%20Zytglogge%20DSC05181.jpg?width=1000",
-      sourceImage:"https://commons.wikimedia.org/wiki/File:Bern_Zytglogge_DSC05181.jpg",
+      image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/The%20Zytglogge%20clock%20tower.jpg?width=1000",
+      sourceImage:"https://commons.wikimedia.org/wiki/File:The_Zytglogge_clock_tower.jpg",
       source:"Wikimedia Commons",
-      license:"CC BY-SA 3.0",
-      credit:"Wikimedia Commons(Wiki Loves Monuments 2011)"
+      license:"CC BY-SA 4.0",
+      credit:"Dmitry A. Mottl"
     }],
     culture:[{
       name:"アルプホルンの演奏",
