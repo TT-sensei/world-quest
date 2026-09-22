@@ -1,0 +1,13 @@
+window.WORLD_COUNTRIES=window.WORLD_COUNTRIES||[];
+window.WORLD_COUNTRIES.push({
+  id:"nl",name:"オランダ",code:"NL",region:"ヨーロッパ",continent:"ユーラシア",capital:"アムステルダム",flag:"assets/flags/nl.svg",emoji:"🇳🇱",
+  items:{
+    place:[{name:"プリンセン運河(アムステルダム)",image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Amsterdam%20city%2C%20wit%20a%20view%20over%20old%20canal%20street%20Prinsengracht%20in%20the%20city-center%2C%20photo%20by%20Fons%20Heijnsbroek%2C%20jan.%202022.jpg?width=1000",sourceImage:"https://commons.wikimedia.org/wiki/File:Amsterdam_city,_wit_a_view_over_old_canal_street_Prinsengracht_in_the_city-center,_photo_by_Fons_Heijnsbroek,_jan._2022.jpg",source:"Wikimedia Commons",license:"パブリックドメイン(CC0)",credit:"Fons Heijnsbroek"}],
+    heritage:[{name:"ヘーレン運河(17世紀運河地区)",image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Amsterdam%20(NL)%2C%20Herengracht%20--%202015%20--%207174.jpg?width=1000",sourceImage:"https://commons.wikimedia.org/wiki/File:Amsterdam_(NL),_Herengracht_--_2015_--_7174.jpg",source:"Wikimedia Commons",license:"CC BY-SA 4.0",credit:"Dietmar Rabich"}],
+    culture:[{name:"チューリップ(花市場)",image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Tulips%20at%20an%20Amsterdam%20flower%20market%20(Unsplash).jpg?width=1000",sourceImage:"https://commons.wikimedia.org/wiki/File:Tulips_at_an_Amsterdam_flower_market_(Unsplash).jpg",source:"Wikimedia Commons",license:"パブリックドメイン(CC0)",credit:"Wikimedia Commons(Unsplash)"}],
+    food:[{name:"ストロープワッフル",image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Stroopwafel%20fresh%20stand.jpg?width=1000",sourceImage:"https://commons.wikimedia.org/wiki/File:Stroopwafel_fresh_stand.jpg",source:"Wikimedia Commons",license:"CC BY-SA 2.0",credit:"Wikimedia Commons contributor"}],
+    facility:[{name:"キンデルダイクの風車群",image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/The%20windmills%20of%20Kinderdijk.JPG?width=1000",sourceImage:"https://commons.wikimedia.org/wiki/File:The_windmills_of_Kinderdijk.JPG",source:"Wikimedia Commons",license:"CC BY-SA 3.0(オランダ)",credit:"Wikimedia Commons contributor"}],
+    nature:[{name:"チューリップ畑",image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Outed.jpg?width=1000",sourceImage:"https://commons.wikimedia.org/wiki/File:Outed.jpg",source:"Wikimedia Commons",license:"CC BY-SA 4.0",credit:"Tonyjmcgregor"}],
+    symbol:[{name:"木靴(クロンペン)",image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Klompen%20(Dutch%20Clogs)%2C%20Wooden%20Shoes%20Museum%20in%20Drenthe.jpg?width=1000",sourceImage:"https://commons.wikimedia.org/wiki/File:Klompen_(Dutch_Clogs),_Wooden_Shoes_Museum_in_Drenthe.jpg",source:"Wikimedia Commons",license:"CC BY 2.0",credit:"Wikimedia Commons contributor"}]
+  }
+});
