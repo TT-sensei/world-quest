@@ -19,11 +19,11 @@ window.WORLD_COUNTRIES.push({
     }],
     heritage:[{
       name:"ツィットグロッゲ(時計塔・旧市街)",
-      image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/The%20Zytglogge%20clock%20tower.jpg?width=1000",
-      sourceImage:"https://commons.wikimedia.org/wiki/File:The_Zytglogge_clock_tower.jpg",
+      image:"https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/Kramgasse%20mit%20Z%C3%A4hringerbrunnen%20und%20Zytgloggeturm%20in%20Bern%20%282014%29.jpg&width=1000",
+      sourceImage:"https://commons.wikimedia.org/wiki/File:Kramgasse_mit_Z%C3%A4hringerbrunnen_und_Zytgloggeturm_in_Bern_%282014%29.jpg",
       source:"Wikimedia Commons",
       license:"CC BY-SA 4.0",
-      credit:"Dmitry A. Mottl"
+      credit:"JoachimKohler-HB"
     }],
     culture:[{
       name:"アルプホルンの演奏",
