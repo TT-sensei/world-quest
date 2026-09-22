@@ -16,7 +16,6 @@
 /* atlas: make country photos easier to see */
 .atlas-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.atlas-item{min-width:0}.atlas-item img{height:190px;object-fit:cover}.atlas-item>div{padding:11px 13px}@media(max-width:900px){.atlas-item img{height:180px}}@media(max-width:720px){.atlas-grid{grid-template-columns:1fr}.atlas-item img{height:210px}}@media(max-width:450px){.atlas-item img{height:190px}}
 
-
 /* quiz: subtle pastel colors for answer choices */
 .quiz-answer-panel .option:nth-child(1){background:#f2f6ff}
 .quiz-answer-panel .option:nth-child(2){background:#f1f8f5}
@@ -25,3 +24,13 @@
 .quiz-answer-panel .option:nth-child(5){background:#f1f7f8}
 .quiz-answer-panel .option:nth-child(6){background:#fff2f4}
 .quiz-answer-panel .option:hover,.quiz-answer-panel .option:focus-visible{filter:saturate(1.08);box-shadow:0 4px 12px rgba(16,35,63,.06);outline:none}
+
+/* quiz: subtle tap feedback + next-button tempo */
+.quiz-answer-panel .option{transition:transform .12s ease,box-shadow .12s ease,filter .12s ease;-webkit-tap-highlight-color:transparent}
+.quiz-answer-panel .option:active{transform:scale(.985);box-shadow:0 2px 6px rgba(16,35,63,.08)}
+.quiz-answer-panel .next{transition:transform .15s ease,box-shadow .15s ease}
+.quiz-answer-panel .next:hover,.quiz-answer-panel .next:focus-visible{transform:translateY(-1px);box-shadow:0 8px 20px rgba(16,35,63,.16);outline:none}
+.quiz-answer-panel .next:active{transform:translateY(1px);box-shadow:0 4px 12px rgba(16,35,63,.12)}
+.quiz-answer-panel .option.correct{background:#effaf5}
+.quiz-answer-panel .option.wrong{background:#fff3f3}
+@media (prefers-reduced-motion:reduce){.quiz-answer-panel .option,.quiz-answer-panel .next{transition:none}}
