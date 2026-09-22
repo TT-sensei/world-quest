@@ -1,0 +1,13 @@
+window.WORLD_COUNTRIES=window.WORLD_COUNTRIES||[];
+window.WORLD_COUNTRIES.push({
+  id:"pe",name:"ペルー",code:"PE",region:"南アメリカ",continent:"南アメリカ",capital:"リマ",flag:"assets/flags/pe.svg",emoji:"🇵🇪",
+  items:{
+    place:[{name:"アルマス広場(クスコ旧市街)",image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Plaza%20de%20Armas%2C%20Cusco%2C%20Per%C3%BA%2C%202015-07-31%2C%20DD%2053-56%20PAN.jpg?width=1000",sourceImage:"https://commons.wikimedia.org/wiki/File:Plaza_de_Armas,_Cusco,_Per%C3%BA,_2015-07-31,_DD_53-56_PAN.jpg",source:"Wikimedia Commons",license:"CC BY-SA 4.0",credit:"Poco a poco"}],
+    heritage:[{name:"マチュ・ピチュ",image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Historic%20Sanctuary%20of%20Machu%20Picchu%20perfect%20view.jpg?width=1000",sourceImage:"https://commons.wikimedia.org/wiki/File:Historic_Sanctuary_of_Machu_Picchu_perfect_view.jpg",source:"Wikimedia Commons",license:"CC BY-SA 4.0",credit:"Wikimedia Commons(Wiki Loves Monuments 2016)"}],
+    culture:[{name:"インティ・ライミ(太陽の祭り)",image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Peru%20-%20Cusco%20122%20-%20Inti%20Raymi%20solstice%20festival%20(7625304144).jpg?width=1000",sourceImage:"https://commons.wikimedia.org/wiki/File:Peru_-_Cusco_122_-_Inti_Raymi_solstice_festival_(7625304144).jpg",source:"Wikimedia Commons",license:"CC BY 2.0",credit:"McKay Savage"}],
+    food:[{name:"セビーチェ",image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Ceviche%20peruano.jpg?width=1000",sourceImage:"https://commons.wikimedia.org/wiki/File:Ceviche_peruano.jpg",source:"Wikimedia Commons",license:"CC BY-SA 4.0",credit:"MiguelAlanCS"}],
+    facility:[{name:"トーレ・タグレ宮殿の木製バルコニー(リマ歴史地区)",image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Palacio%20de%20Torre%20Tagle%20Lima%2C%20Peru.jpg?width=1000",sourceImage:"https://commons.wikimedia.org/wiki/File:Palacio_de_Torre_Tagle_Lima,_Peru.jpg",source:"Wikimedia Commons",license:"CC BY-SA 4.0",credit:"Wikimedia Commons(Wiki Loves Monuments 2019)"}],
+    nature:[{name:"アンデス山脈(コルディレラ・ブランカ)",image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Nevado%20Santa%20Cruz%2C%20Cordillera%20Blanca%2C%20Peru%20(24755730783).jpg?width=1000",sourceImage:"https://commons.wikimedia.org/wiki/File:Nevado_Santa_Cruz,_Cordillera_Blanca,_Peru_(24755730783).jpg",source:"Wikimedia Commons",license:"CC BY 2.0",credit:"Dick Culbert"}],
+    symbol:[{name:"リャマ(ビルカノタ山脈)",image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Llamas%20en%20cordilla%20de%20Vilcanota.jpg?width=1000",sourceImage:"https://commons.wikimedia.org/wiki/File:Llamas_en_cordilla_de_Vilcanota.jpg",source:"Wikimedia Commons",license:"CC BY-SA 4.0",credit:"Wikimedia Commons contributor"}]
+  }
+});
