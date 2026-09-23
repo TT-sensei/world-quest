@@ -22,11 +22,11 @@ window.WORLD_COUNTRIES.push({
     heritage:[
       {
         name:"ブルージュ歴史地区",
-        image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Bruges%20Belgium.jpg?width=1000",
-        sourceImage:"https://commons.wikimedia.org/wiki/File:Bruges_Belgium.jpg",
+        image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Bruges%2C%20Belgium.jpg?width=1000",
+        sourceImage:"https://commons.wikimedia.org/wiki/File:Bruges,_Belgium.jpg",
         source:"Wikimedia Commons",
-        license:"CC BY-SA 3.0",
-        credit:"Wikimedia Commons contributor"
+        license:"CC BY 2.0",
+        credit:"RB Photo"
       }
     ],
     culture:[
@@ -35,8 +35,8 @@ window.WORLD_COUNTRIES.push({
         image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Centre%20belge%20de%20la%20BD%202017.jpg?width=1000",
         sourceImage:"https://commons.wikimedia.org/wiki/File:Centre_belge_de_la_BD_2017.jpg",
         source:"Wikimedia Commons",
-        license:"CC BY-SA",
-        credit:"Wikimedia Commons contributor"
+        license:"CC BY-SA 4.0",
+        credit:"Pierre Goiffon"
       }
     ],
     food:[
@@ -65,8 +65,8 @@ window.WORLD_COUNTRIES.push({
         image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Vue%20foret%20ardenne%20belge.jpg?width=1000",
         sourceImage:"https://commons.wikimedia.org/wiki/File:Vue_foret_ardenne_belge.jpg",
         source:"Wikimedia Commons",
-        license:"CC BY-SA",
-        credit:"Wikimedia Commons contributor"
+        license:"CC BY 4.0",
+        credit:"Perrine Aguiar"
       }
     ],
     symbol:[
