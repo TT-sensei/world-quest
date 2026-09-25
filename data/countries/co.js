@@ -1,0 +1,13 @@
+window.WORLD_COUNTRIES=window.WORLD_COUNTRIES||[];
+window.WORLD_COUNTRIES.push({
+  id:"co",name:"コロンビア",code:"CO",region:"南アメリカ",continent:"南アメリカ",capital:"ボゴタ",flag:"assets/flags/co.svg",emoji:"🇨🇴",
+  items:{
+    place:[{name:"カラフルな街並み(カルタヘナ)",kind:"名所",image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Cartagena%2C%20Colombia%20(5049256137).jpg?width=1000",sourceImage:"https://commons.wikimedia.org/wiki/File:Cartagena,_Colombia_(5049256137).jpg",source:"Wikimedia Commons",license:"CC BY 2.0",credit:"Pedro Szekely"}],
+    heritage:[{name:"カルタヘナを囲む城壁",kind:"世界遺産",image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Las%20Murallas%2C%20the%20walls%20of%20Cartagena%2C%20Colombia%20(23955876854).jpg?width=1000",sourceImage:"https://commons.wikimedia.org/wiki/File:Las_Murallas,_the_walls_of_Cartagena,_Colombia_(23955876854).jpg",source:"Wikimedia Commons",license:"CC BY 2.0",credit:"Joe Ross"}],
+    culture:[{name:"バランキージャのカーニバル",kind:"祭り・文化",image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Carnaval%20de%20barranquilla.png?width=1000",sourceImage:"https://commons.wikimedia.org/wiki/File:Carnaval_de_barranquilla.png",source:"Wikimedia Commons",license:"CC BY-SA 4.0",credit:"Wikimedia Commons(Wiki Loves Love 2019)"}],
+    food:[{name:"バンデハ・パイサ(盛り合わせ料理)",kind:"食文化",image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Bandeja%20paisa%2C%20plato%20Colombiano.jpg?width=1000",sourceImage:"https://commons.wikimedia.org/wiki/File:Bandeja_paisa,_plato_Colombiano.jpg",source:"Wikimedia Commons",license:"CC0 1.0",credit:"Wilfredor"}],
+    facility:[{name:"塩の大聖堂(シパキラ)の祭壇",kind:"施設",image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Salt%20Cathedral%20of%20Zipaquir%C3%A1%20main%20altar.jpg?width=1000",sourceImage:"https://commons.wikimedia.org/wiki/File:Salt_Cathedral_of_Zipaquir%C3%A1_main_altar.jpg",source:"Wikimedia Commons",license:"CC BY-SA 4.0",credit:"Novoaparra"}],
+    nature:[{name:"ココラ渓谷の景観",kind:"自然",image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Valle%20de%20Cocora%2C%20Colombia%2003.jpg?width=1000",sourceImage:"https://commons.wikimedia.org/wiki/File:Valle_de_Cocora,_Colombia_03.jpg",source:"Wikimedia Commons",license:"CC BY-SA 4.0",credit:"Bernard Gagnon"}],
+    symbol:[{name:"キンディオワックスヤシ(国樹)",kind:"シンボル",image:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Valle%20del%20cocora%20-%20wax%20palm%2001.jpg?width=1000",sourceImage:"https://commons.wikimedia.org/wiki/File:Valle_del_cocora_-_wax_palm_01.jpg",source:"Wikimedia Commons",license:"CC BY-SA 4.0",credit:"Angela Calle and Daniel Di Palma"}]
+  }
+});
