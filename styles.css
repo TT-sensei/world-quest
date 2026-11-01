@@ -54,3 +54,7 @@
 
 /* country page readability */
 .country-category-grid{grid-template-columns:1fr}.country-item img{height:280px;object-fit:cover}.country-item>div{padding:13px 15px}.country-item strong{font-size:19px}.country-search{display:block;text-align:center;margin:18px auto 8px;padding:14px 18px;max-width:360px;border:1px solid var(--line);border-radius:12px;background:#fff;text-decoration:none;font-weight:700}@media(max-width:720px){.country-item img{height:250px}}@media(max-width:450px){.country-item img{height:220px}}
+
+.country-item .item-desc{margin:7px 0 0;font-size:13.5px;line-height:1.65;color:#3d4756}
+.feedback .feedback-copy{font-size:13.5px}
+ruby rt{font-size:.52em;color:#5a6a7f}
