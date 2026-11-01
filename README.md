@@ -14,7 +14,7 @@ https://github.com/TT-sensei/world-quest
 
 ## 現在の内容
 
-現在は21か国を収録しています。
+現在は60か国を収録しています。
 
 - 日本
 - アメリカ
