@@ -58,3 +58,6 @@
 .country-item .item-desc{margin:7px 0 0;font-size:13.5px;line-height:1.65;color:#3d4756}
 .feedback .feedback-copy{font-size:13.5px}
 ruby rt{font-size:.52em;color:#5a6a7f}
+
+.option.flag-option{align-items:center}
+.option .option-flag{width:88px;height:59px;object-fit:cover;border-radius:7px;border:1px solid #d8dee6;background:#fff}
